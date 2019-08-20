@@ -57,7 +57,18 @@ def start(bot, update):
 #         update.message.reply_text(f'{responses.PACK_CREATED}: {pack_number}')
 
 
+def barriquelo(bot: Bot, update: Update):
+    username = update.message.from_user.username
+    if username == 'Barichello':
+        update.message.reply_text('vai tomar no cu barriquélo')
+        return True
+    else:
+        return False
+
+
 def create_pack(bot: Bot, update: Update):
+    if barriquelo(bot, update):
+        return
     user_id = update.message.from_user.id
     if not check_msg_format(update.message.text):
         update.message.reply_text(responses.INVALID_MSG)
@@ -78,6 +89,8 @@ def create_pack(bot: Bot, update: Update):
 
 
 def add_sticker(bot: Bot, update: Update):
+    if barriquelo(bot, update):
+        return
     msg: Message = update.message
     msg_type = get_msg_type(msg)
     response = responses.ERROR_MSG
